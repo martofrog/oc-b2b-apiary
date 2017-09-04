@@ -1,0 +1,92 @@
+#%RAML 1.0
+title: ocapi
+version: v1
+baseUri: http://api.oddsckecker.com
+/api/b2b/v1/subevent-search:
+  get:
+    description:
+        returns search results for the provided keywords grouped by subevent, additially results can be limited to certain sports, categories or events
+    headers:
+      API-KEY:
+        type: string
+        description: api-key you have been provided to access OC api
+    queryParameters:
+      terms:
+          type: string
+          example: "arsenal premier league football"
+          required: true
+          description: free text search string
+      sports:
+          type: string
+          example: "123,456"
+          required: false
+          description: comma separated string of OC ids representing a sport you are interested in
+      categories:
+          type: string
+          example: "123,456"
+          required: false
+          description: comma separated string of OC ids representing a categories you are interested in
+      events:
+          type: string
+          example: "123,456"
+          required: false
+          description: comma separated string of OC ids representing a categories you are interested in
+    responses:
+      200:
+        body:
+          application/json:
+            example:
+                {
+                    "success": false,
+                    "subevents": [
+                        {
+                            "subeventId": 90759788,
+                            "hasStatsInfo": true,
+                            "subeventName": "Shrewsbury v Wigan",
+                            "eventId": 9963,
+                            "eventName": "English League One Matches",
+                            "eventLogo": "https://static.oddschecker.com/OC/i/OC/API/events/v1/ic_League1.png",
+                            "startTime": "20170909T150000+0100",
+                            "markets": [
+                                {
+                                    "marketId": 3207419366,
+                                    "marketName": "Winner",
+                                    "marketType": 1,
+                                    "marketPriority": 1,
+                                    "subeventId": 90759788,
+                                    "subeventName": "Shrewsbury v Wigan",
+                                    "bets": [
+                                        {
+                                            "categoryId": 2,
+                                            "categoryGroupId": 2,
+                                            "betId": 23460748991,
+                                            "betName": "Shrewsbury",
+                                            "subeventId": 90759788,
+                                            "subeventName": "Shrewsbury v Wigan",
+                                            "eventId": 9963,
+                                            "eventName": "English League One Matches",
+                                            "startTime": "20170909T150000+0100",
+                                            "marketId": 3207419366,
+                                            "marketName": "Winner",
+                                            "odds": [
+                                                {
+                                                    "bookieCode": "B3",
+                                                    "oddsFractional": "13/5",
+                                                    "oddsDecimal": "3.6",
+                                                    "oddsUs": "260",
+                                                    "priceType": "LP"
+                                                }
+                                            ]
+                                        },
+                                    ],
+                                    "marketBetsGroupOf": 3
+                                }
+                            ],
+                            "subeventType": "match",
+                            "categoryGroupId": 2,
+                            "categoryGroupName": "football",
+                            "inRunning": false,
+                            "pastResult": false
+                        }
+                    ]
+                }
